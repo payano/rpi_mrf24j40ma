@@ -7,31 +7,37 @@ C_SRCS += \
 ../src/af_ieee802154.c 
 
 CPP_SRCS += \
-../src/radio_com.cpp 
+../src/Main.cpp \
+../src/Mqtt.cpp \
+../src/RadioCom.cpp 
 
 OBJS += \
-./src/af_ieee802154.o \
-./src/radio_com.o 
+./src/Main.o \
+./src/Mqtt.o \
+./src/RadioCom.o \
+./src/af_ieee802154.o 
 
 C_DEPS += \
 ./src/af_ieee802154.d 
 
 CPP_DEPS += \
-./src/radio_com.d 
+./src/Main.d \
+./src/Mqtt.d \
+./src/RadioCom.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-src/%.o: ../src/%.c
-	@echo 'Building file: $<'
-	@echo 'Invoking: Cross GCC Compiler'
-	arm-linux-gnueabihf-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-linux-gnueabihf-g++ -std=c++1y -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+src/%.o: ../src/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross GCC Compiler'
+	arm-linux-gnueabihf-gcc -std=c11 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
