@@ -8,13 +8,14 @@
 
 #include <iostream>
 
-#include "af_ieee802154.h"
+#include "RadioCom.h"
 
 using namespace std;
 
 int main() {
-	ieee802154_send();
+	cout << "Starting program." << endl; // prints Hello!
 
-	cout << "Hello!" << endl; // prints Hello!
+	RadioCom radioCom;
+	radioCom.start();
 	return 0;
 }
