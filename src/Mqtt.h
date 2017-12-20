@@ -8,7 +8,7 @@
 #pragma once
 #include <mosquittopp.h>
 
-class myMosq : public mosqpp::mosquittopp
+class Mqtt: public mosqpp::mosquittopp
 {
 private:
  const char     *     host;
@@ -21,7 +21,7 @@ private:
  void on_disconnect(int rc);
  void on_publish(int mid);
 public:
- myMosq(const char *id, const char * _topic, const char *host, int port);
- ~myMosq();
+ Mqtt(const char *id, const char * _topic, const char *host, int port);
+ ~Mqtt();
  bool send_message(const char * _message);
 };

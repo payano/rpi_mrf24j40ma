@@ -14,4 +14,5 @@ public:
 	virtual void start();
 	void static start_mqtt();
 	void static start_radio();
+	void static start_radio2();
 };

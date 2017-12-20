@@ -3,10 +3,10 @@
 #include <string.h>
 #include <iostream>
 
-myMosq::myMosq(const char * _id,const char * _topic, const char * _host, int _port) : mosqpp::mosquittopp(_id)
+Mqtt::Mqtt(const char * _id,const char * _topic, const char * _host, int _port) : mosqpp::mosquittopp(_id)
 {
 	mosqpp::lib_init();        // Mandatory initialization for mosquitto library
-	this->keepalive = 60;    // Basic configuration setup for myMosq class
+	this->keepalive = 60;    // Basic configuration setup for Mqtt class
 	this->id = _id;
 	this->port = _port;
 	this->host = _host;
@@ -17,12 +17,12 @@ myMosq::myMosq(const char * _id,const char * _topic, const char * _host, int _po
 	loop_start();            // Start thread managing connection / publish / subscribe
 };
 
-myMosq::~myMosq() {
+Mqtt::~Mqtt() {
  loop_stop();            // Kill the thread
  mosqpp::lib_cleanup();    // Mosquitto library cleanup
  }
 
-bool myMosq::send_message(const  char * _message)
+bool Mqtt::send_message(const  char * _message)
  {
  // Send message - depending on QoS, mosquitto lib managed re-submission this the thread
  //
@@ -37,20 +37,20 @@ bool myMosq::send_message(const  char * _message)
  return ( ret == MOSQ_ERR_SUCCESS );
  }
 
-void myMosq::on_disconnect(int rc) {
- std::cout << ">> myMosq - disconnection(" << rc << ")" << std::endl;
+void Mqtt::on_disconnect(int rc) {
+ std::cout << ">> Mqtt - disconnection(" << rc << ")" << std::endl;
  }
 
-void myMosq::on_connect(int rc)
+void Mqtt::on_connect(int rc)
  {
  if ( rc == 0 ) {
- std::cout << ">> myMosq - connected with server" << std::endl;
+ std::cout << ">> Mqtt - connected with server" << std::endl;
  } else {
- std::cout << ">> myMosq - Impossible to connect with server(" << rc << ")" << std::endl;
+ std::cout << ">> Mqtt - Impossible to connect with server(" << rc << ")" << std::endl;
  }
  }
 
-void myMosq::on_publish(int mid)
+void Mqtt::on_publish(int mid)
  {
- std::cout << ">> myMosq - Message (" << mid << ") succeed to be published " << std::endl;
+ std::cout << ">> Mqtt - Message (" << mid << ") succeed to be published " << std::endl;
  }

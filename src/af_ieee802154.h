@@ -35,7 +35,7 @@ extern "C" {
 
 #define IEEE802154_ADDR_LEN 8
 #define MAX_PACKET_LEN 127
-#define EXTENDED 1
+#define EXTENDED 0
 
 enum {
 	IEEE802154_ADDR_NONE = 0x0,

@@ -86,14 +86,16 @@ int ieee802154_send(){
 	memcpy(&dst.addr.hwaddr, long_addr, IEEE802154_ADDR_LEN);
 #else
 	dst.addr.addr_type = IEEE802154_ADDR_SHORT;
-	dst.addr.short_addr = 0x0002;
+	dst.addr.short_addr = 0x6001;
 #endif
 
-	sprintf(buf, "Hello world from IEEE 802.15.4 socket example!");
+	//sprintf(buf, "Hello world from IEEE 802.15.4 socket example!");
 
 	/* sendto() is used for implicity in this example, bin()/send() would
 	 * be an alternative */
-	len = sendto(sd, buf, strlen(buf), 0, (struct sockaddr *)&dst, sizeof(dst));
+	char bufa[] = {0x6a, 0x6f, 0x68, 0x61, 0x6e, 0x20, 0x73, 0x6b, 0x69, 0x63, 0x6b, 0x61, 0x72};
+
+	len = sendto(sd, bufa, strlen(bufa), 0, (struct sockaddr *)&dst, sizeof(dst));
 	if (len < 0) {
 		perror("sendto");
 	}
