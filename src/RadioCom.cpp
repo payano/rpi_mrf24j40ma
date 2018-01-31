@@ -37,8 +37,13 @@ void RadioCom::start(){
 
 void RadioCom::start_mqtt(){
 	std::cout << "MQTT starting." << std::endl;
+	Mqtt mqtt("clientId0","test","localhost",1883);
+	// 		int subscribe(int *mid, const char *sub, int qos=0);
+
+	mqtt.recieve_message();
 	while(1){
-		std::cout << "MQTT running." << std::endl;
+//		std::cout << "MQTT running." << std::endl;
+//		mqtt.send_message("YOLO");
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 
@@ -46,7 +51,7 @@ void RadioCom::start_mqtt(){
 void RadioCom::start_radio(){
 	std::cout << "Radio recv starting." << std::endl;
 	while(1){
-		std::cout << "Radio recv running." << std::endl;
+//		std::cout << "Radio recv running." << std::endl;
 		//ieee802154_recv();
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
@@ -54,8 +59,8 @@ void RadioCom::start_radio(){
 void RadioCom::start_radio2(){
 	std::cout << "Radio send starting." << std::endl;
 	while(1){
-		std::cout << "Radio send running." << std::endl;
-		ieee802154_send();
+//		std::cout << "Radio send running." << std::endl;
+//		ieee802154_send();
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }

@@ -50,6 +50,34 @@ void Mqtt::on_connect(int rc)
  }
  }
 
+void Mqtt::recieve_message(){
+	int messageId = 0;
+	int ret = mosquittopp::subscribe(&messageId,"test1");
+
+
+}
+void Mqtt::on_message(const struct mosquitto_message *message) {
+
+//	struct mosquitto_message{
+//		uint16_t mid;
+//		char *topic;
+//		uint8_t *payload;
+//		uint32_t payloadlen;
+//		int qos;
+//		bool retain;
+//	};
+	std::cout <<
+			"Topic: " << message->topic << ", payload: " <<
+			reinterpret_cast<char*>(message->payload) << std::endl;
+	return;
+}
+
+void Mqtt::on_subscribe(int mid, int qos_count, const int *granted_qos)
+{
+	std::cout << "mid: " << std::to_string(mid) ;
+	return;
+}
+
 void Mqtt::on_publish(int mid)
  {
  std::cout << ">> Mqtt - Message (" << mid << ") succeed to be published " << std::endl;
